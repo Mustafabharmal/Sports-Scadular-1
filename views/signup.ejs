@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%=csrfToken%>" />
+    <title>SignUp | Sports Scheduler</title>
+    <link rel="shortcut icon" href="./2.svg" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .bg-image {
+        height: 100vh;
+        width: 100vw;
+        background: url('https://source.unsplash.com/1600x900/?nature,4k')
+          no-repeat center center/cover;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body class="flex justify-center items-center bg-image">
+    <div class="bg-white p-8 rounded-lg shadow-md w-3/12 h-3/6">
+      <% include('header.ejs') %>
+      <h6 class="text-xl font-medium mb-4">SignUp as a new User</h6>
+      <form action="/users" method="post">
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+        <div class="mb-1">
+          <label for="name" class="block text-gray-700 font-medium mb-2"
+            >Name</label
+          >
+          <input
+            class="border border-gray-300 text-gray-900 rounded p-2 w-full"
+            type="text"
+            name="name"
+          />
+        </div>
+        <div class="mb-1">
+          <label for="email" class="block text-gray-700 font-medium mb-2"
+            >Email</label
+          >
+          <input
+            class="border border-gray-300 rounded p-2 w-full text-gray-900"
+            type="email"
+            name="email"
+          />
+        </div>
+        <div class="mb-1">
+          <label for="password" class="block text-gray-700 font-medium mb-2"
+            >Password</label
+          >
+          <input
+            class="border border-gray-300 rounded p-2 w-full text-gray-900"
+            type="password"
+            name="password"
+          />
+        </div>
+        <div class="flex justify-center items-center mt-6">
+          <button
+            class="text-white bg-blue-500 hover:bg-blue-600 rounded-md px-4 py-2 font-medium"
+            type="submit"
+          >
+            Sign up
+          </button>
+        </div>
+      </form>
+      <% if(messages && messages.error && messages.error.length> 0) { %>
+      <ul class="list-disc m-10 pl-8">
+        <% for(var i=0; i<messages.error.length; i++) { %>
+        <li class="text-red-500">
+          <%= messages.error[i] %>
+        </li>
+        <% } %>
+      </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

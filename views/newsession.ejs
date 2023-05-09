@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New session</title>
+  <meta name="csrf-token" content="<%=csrfToken%>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .navup {
+      color: #fff;
+   
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+  } 
+  .navup:hover {
+    background-color: #555;
+    color: #fff;
+  }
+  </style>
+</head>
+<body>
+  <nav class="py-4 px-8 bg-purple-500 text-white w-full fixed top-0">
+    <div class="flex justify-between items-center">
+      <div>
+        <a href="/home" class="navup font-bold text-lg">Home</a>
+      </div>      
+      <div>
+        <a href="/sport/<%=id%>" class="navup font-bold text-lg">Back</a>
+      </div>
+    </div>
+  </nav>
+  <div class="flex items-center justify-center h-screen">
+    <div class="col-span-2 col-start-3 px-8 py-4">
+      <form action="/sportsession/<%=id%>" method="post">
+        <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+        <div class="py-3">
+          <label for="email" class="block font-medium text-gray-700">Where will the session happen?</label>
+          <input class="border border-gray-300 rounded p-2 w-full text-gray-900 mt-2" type="text" name="venue" />
+        </div>
+        <div class="py-3">
+          <label for="when" class="block font-medium text-gray-700">When?</label>
+          <input class="border border-gray-300 rounded p-2 w-full text-gray-900 mt-2" type="datetime-local"  
+          min="${new Date().toISOString().slice(0, 16)}"
+            name="when"   />
+        </div>
+        <div class="py-3">
+          <label for="dt" class="block font-medium text-gray-700">Players you would like to add in the session</label>
+          <input class="border border-gray-300 rounded p-2 w-full text-gray-900 mt-2" type="text" name="players" />
+        </div>
+        <div class="py-3">
+          <label for="requiredteammembers" class="block font-medium text-gray-700">How many more players do you
+            need?</label>
+          <input class="border border-gray-300 rounded p-2 w-full text-gray-900 mt-2" type="number"
+            name="requiredteammembers" max="100" />
+        </div>
+        <div class="py-3">
+          <button  class="text-green-600 rounded text-white bg-green-600 hover:bg-green-800 font-medium px-5 py-2"
+            type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+      <% if(messages && messages.error && messages.error.length> 0) { %>
+        <ul class="list-disc list-inside text-red-500">
+          <% for(var i=0; i<messages.error.length; i++) { %>
+            <li class="text-red-500">
+              <%= messages.error[i] %>
+            </li>
+            <% } %>
+              <% } %>
+    </div>
+  </div>
+</body>
+</html>

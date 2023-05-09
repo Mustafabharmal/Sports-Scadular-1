@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="csrf-token" content="<%=csrfToken%>" />
+  <title>Login | Sports Scheduler</title>
+  <link rel="shortcut icon" href="./2.svg" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .bg-image {
+      height: 100vh;
+      width: 100vw;
+      background: url('https://source.unsplash.com/1600x900/?sport,sports') no-repeat center center/cover;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      object-fit: cover;
+    }
+
+    .grecaptcha-badge {
+      display: block !important;
+    }
+  </style>
+</head>
+
+<body class="flex justify-center items-center bg-image">
+  <div class="bg-white p-8 rounded-lg shadow-md">
+    <% include('header.ejs') %>
+    <h1 class="text-3xl font-bold text-gray-800 text-center py-4">
+      Login to your account
+    </h1>
+    <form action="/session" method="post">
+      <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
+      <div class="py-3">
+        <label class="block font-medium text-gray-700" for="email">Email</label>
+        <input class="border border-gray-300 rounded p-2 w-full text-gray-900" type="email" name="email" required />
+      </div>
+      <div class="py-3">
+        <label class="block font-medium text-gray-700" for="password">Password</label>
+        <input class="border border-gray-300 rounded p-2 w-full text-gray-900" type="password" name="password" required />
+      </div>
+      <div class="g-recaptcha" data-sitekey="6Lcw6eMlAAAAAEU-JvdgQOusLE2n2jIDw_TPLimk"></div>
+      <div class="py-3">
+        <button class="text-white rounded bg-green-600 hover:bg-green-800 font-medium px-5 py-2" type="submit">
+          Sign in
+        </button>
+      </div>
+    </form>
+    <% if(messages && messages.error && messages.error.length> 0) { %>
+    <ul class="list-disc pl-8">
+      <% for(var i=0; i<messages.error.length; i++) { %>
+      <li class="text-red-500">
+        <%= messages.error[i] %>
+      </li>
+      <% } %>
+    </ul>
+    <% } %>
+    <div class="text-center pt-4">
+      <span class="text-gray-600">Don't have an account?</span>
+      <a href="/signup" class="text-green-600 font-medium ml-2 hover:underline">Sign up</a>
+    </div>
+  </div>
+</body>
+
+</html>

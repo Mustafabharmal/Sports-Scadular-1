@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%=csrfToken%>" />
+    <link rel="shortcut icon" href="./2.svg" type="image/x-icon" />
+
+    <title>Sports Scheduler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .bg {
+        height: 100vh;
+        width: 100vw;
+        background: url('https://source.unsplash.com/1600x900/?sport,sports')
+          no-repeat center center/cover;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        object-fit: cover;
+      }
+      .bg-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      .content {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg">
+      <div class="bg-overlay"></div>
+      <div class="content flex justify-center items-center h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-md">
+          <div class="text-center">
+            <h1 class="text-4xl font-bold text-gray-800">
+              Welcome to Sports Scheduler
+            </h1>
+            <div class="mt-8">
+              <p>
+                New to here <a class="text-green-600" href="/signup">signup</a>
+              </p>
+              <p class="mt-2">
+                Already had an account
+                <a class="text-green-600" href="/login">login</a>
+              </p>
+              <p class="mt-2">
+                Logged in
+                <a class="text-green-600" href="/home">Return Home</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
